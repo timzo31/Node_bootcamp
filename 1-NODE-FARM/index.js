@@ -1,6 +1,32 @@
 const fs = require("fs");
 const http = require("http");
+const url = require("url");
 
+//////////////////////////////////////
+//////////   SERVER    ///////////////
+const server = http.createServer((req, res) => {
+  // console.log(req.url);
+
+  const pathName = req.url;
+
+  if (pathName === "/" || pathName === "/overview") {
+    res.end("This is the OVERVIEW page");
+  } else if (pathName === "/product") {
+    res.end("This is the PRODUCT page");
+  } else {
+    res.writeHead(404, {
+      "content-type": "text/html",
+    });
+    res.end("<h1>Page not Found!</h1>");
+  }
+});
+
+server.listen(process.env.PORT || 8000, () => {
+  console.log("Listening on port ", process.env.PORT || 8000);
+});
+
+//////////////////////////////////////
+////////////   FILES   ///////////////
 // Blocking, Synchronous way
 /*
 const textIn = fs.readFileSync("./txt/input.txt", "utf-8");
@@ -29,14 +55,3 @@ fs.readFile("./txt/start.txt", "utf-8", (err, data1) => {
 });
 console.log("Will read file");
 */
-
-//////////////////////////////////////
-//////////   SERVER    ///////////////
-const server = http.createServer((req, res) => {
-  console.log(req);
-  res.end("Hello from the server!");
-});
-
-server.listen(process.env.PORT || 8000, () => {
-  console.log("Listening on port ", process.env.PORT || 8000);
-});
