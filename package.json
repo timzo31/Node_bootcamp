@@ -1,0 +1,22 @@
+{
+  "name": "node_bootcamp",
+  "version": "1.0.0",
+  "description": "NodeJs, Express, MongoDB & more: The bootcamp 2022",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/timzo31/Node_bootcamp.git"
+  },
+  "author": "TIMERA Mamadou",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/timzo31/Node_bootcamp/issues"
+  },
+  "homepage": "https://github.com/timzo31/Node_bootcamp#readme",
+  "dependencies": {
+    "live-server": "^1.2.2"
+  }
+}
