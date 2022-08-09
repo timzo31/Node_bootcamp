@@ -7,18 +7,21 @@ const url = require("url");
 
 const replaceTemplate = (temp, product) => {
   let output = temp.replace(/{%PRODUCTNAME%}/g, product.productName);
-  output = temp.replace(/{%IMAGE%}/g, product.image);
-  output = temp.replace(/{%PRICE%}/g, product.price);
-  output = temp.replace(/{%FROM%}/g, product.from);
-  output = temp.replace(/{%NUTRIENTS%}/g, product.nutrients);
-  output = temp.replace(/{%QUANTITY%}/g, product.quantity);
-  output = temp.replace(/{%DESCRIPTION%}/g, product.description);
-  output = temp.replace(/{%ID%}/g, product.id);
+  output = output.replace(/{%IMAGE%}/g, product.image);
+  output = output.replace(/{%PRICE%}/g, product.price);
+  output = output.replace(/{%FROM%}/g, product.from);
+  output = output.replace(/{%NUTRIENTS%}/g, product.nutrients);
+  output = output.replace(/{%QUANTITY%}/g, product.quantity);
+  output = output.replace(/{%DESCRIPTION%}/g, product.description);
+  output = output.replace(/{%ID%}/g, product.id);
 
   if (!product.organic)
-    output = temp.replace(/{%NOT_ORGANIC%}/g, "not-organic");
+    output = output.replace(/{%NOT_ORGANIC%}/g, "not-organic");
+
   return output;
 };
+
+//
 
 const tempOverview = fs.readFileSync(
   `${__dirname}/templates/template-overview.html`,
@@ -29,7 +32,7 @@ const tempCard = fs.readFileSync(
   "utf-8"
 );
 const tempProduct = fs.readFileSync(
-  `${__dirname}/templates/product.html`,
+  `${__dirname}/templates/template-product.html`,
   "utf-8"
 );
 
@@ -37,8 +40,6 @@ const data = fs.readFileSync(`${__dirname}/dev-data/data.json`, "utf-8");
 const dataObj = JSON.parse(data);
 
 const server = http.createServer((req, res) => {
-  // console.log(req.url);
-
   const pathName = req.url;
 
   // Overview Page
@@ -48,21 +49,27 @@ const server = http.createServer((req, res) => {
     const cardsHtml = dataObj
       .map((el) => replaceTemplate(tempCard, el))
       .join("");
-    const output = tempOverview.replace("{%PRODUCT_CARDS%}", cardsHtml);
-
     console.log(cardsHtml);
 
+    const output = tempOverview.replace("{%PRODUCT_CARDS%}", cardsHtml);
+
+    // console.log(cardsHtml);
+
+    // res.end(output);
     res.end(output);
 
     // Product Page
   } else if (pathName === "/product") {
-    res.writeHead(200, { "Content-type": "text/html" });
-    res.end(tempProduct);
+    // res.writeHead(200, { "Content-type": "text/html" });
+    // res.end(tempProduct);
+    res.end("This is the PRODUCT");
 
     // API Route
   } else if (pathName === "/api") {
     res.writeHead(200, { "Content-type": "application/json" });
     res.end(data);
+
+    // NOT found
   } else {
     res.writeHead(404, {
       "Content-type": "text/html",
@@ -70,6 +77,7 @@ const server = http.createServer((req, res) => {
     });
     res.end("<h1>Page not Found!</h1>");
   }
+  // });
 });
 
 server.listen(process.env.PORT || 8000, () => {
