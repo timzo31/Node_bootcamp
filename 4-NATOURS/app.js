@@ -88,21 +88,19 @@ app.patch('/api/v1/tours/:id', (req, res) => {
   });
 });
 
-// app.delete('/api/v1/tours/:id', (req, res) => {
-//   if (req.params.id > tours.length) {
-//     return res.status(404).json({
-//       status: 'failed',
-//       message: 'Invalid ID',
-//     });
-//   }
+app.delete('/api/v1/tours/:id', (req, res) => {
+  if (req.params.id > tours.length) {
+    return res.status(404).json({
+      status: 'failed',
+      message: 'Invalid ID',
+    });
+  }
 
-//   res.status(200).json({
-//     status: 'Success',
-//     data: {
-//       tour: '<Tour deleted successfully',
-//     },
-//   });
-// });
+  res.status(204).json({
+    status: 'Success',
+    data: null,
+  });
+});
 
 const port = 3000;
 app.listen(port, () => {
