@@ -1,3 +1,7 @@
+// exports.checkID = (req, res, next, val) => {
+//   if(req.params.id > user)
+// }
+
 exports.getAllUsers = (req, res) => {
   res.status(500).json({
     status: 'Error',

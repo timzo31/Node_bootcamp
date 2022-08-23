@@ -17,6 +17,16 @@ exports.checkID = (req, res, next, val) => {
   next();
 };
 
+exports.checkBody = (req, res, next) => {
+  if (!req.body.name || !req.body.price) {
+    return res.status(404).json({
+      status: 'Failed',
+      message: 'Missing name or price',
+    });
+  }
+  next();
+};
+
 exports.getAllTours = (req, res) => {
   console.log(req.requestTime);
 
@@ -61,7 +71,10 @@ exports.createTour = (req, res) => {
   //     });
   //   }
   // );
-  res.send('Done');
+  res.status(201).json({
+    status: 'Success',
+    message: 'Tour created successfully !!',
+  });
 };
 
 exports.updateTour = (req, res) => {
