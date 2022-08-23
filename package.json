@@ -2,9 +2,10 @@
   "name": "node_bootcamp",
   "version": "1.0.0",
   "description": "NodeJs, Express, MongoDB & more: The bootcamp 2022",
-  "main": "index.js",
+  "main": "4-NATOURS/app.js",
   "scripts": {
-    "start": "nodemon app.js"
+    "serve": "nodemon 4-NATOURS/server.js",
+    "start": "npm run serve"
   },
   "repository": {
     "type": "git",

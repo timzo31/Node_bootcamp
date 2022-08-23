@@ -3,13 +3,15 @@ const fs = require('fs');
 const port = 3000;
 const tours = require('./dev-data/data/tours-simple.json');
 
-const toursSimple = JSON.parse(
-  fs.readFileSync(`${__dirname}/dev-data/data/tours-simple.json`)
-);
+// const toursSimple = JSON.parse(
+//   fs.readFileSync(`${__dirname}/dev-data/data/tours-simple.json`)
+// );
 
 const app = express();
 
-app.use(express());
+app.use(morgan('dev'));
+
+app.use(express.json());
 
 app.get('/', (req, res) => {
   res.status(200).json({
@@ -35,10 +37,19 @@ app.post('/api/v1/tours', (req, res) => {
   tours.push(newTour);
 });
 
-app.delete('/api/v1/tours/:id', (req, res) => {});
+// Tour Routes
+const router = express.Router();
+router.route('/').get(getAllTours).post(createTour);
 
-app.update('/api/v1/tours', (req, res) => {});
+router.route('/:id').get(getTour).patch(updateTour).delete(deleteTour);
 
-app.update('/api/v1/tours/:id', (req, res) => {});
+// User Routes
+const routerU = express.Router();
+routerU.route('/').get(getAllUsers).post(createUser);
+
+routerU.route('/:id').get(getUser).patch(updateUser).delete(deleteUser);
+
+app.use('/api/v1/tours', router);
+app.use('/api/v1/tours', routerU);
 
 app.listen(process.env.PORT || port);
