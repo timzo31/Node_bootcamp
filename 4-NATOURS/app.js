@@ -10,8 +10,8 @@ const app = express();
 
 // Using a middleware
 app.use(morgan('dev'));
-
 app.use(express.json());
+app.use(express.static(`${__dirname}/public`));
 
 // 3) ROUTES MIDDLEWARES
 app.use('/api/v1/tours', tourRouter);
