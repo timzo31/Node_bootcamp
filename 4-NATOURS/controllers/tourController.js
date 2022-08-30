@@ -5,6 +5,13 @@ const tours = require(`../dev-data/data/tours-simple.json`);
 const { findById } = require('./../models/tourModel');
 const { match } = require('assert');
 
+exports.aliasTopTours = (req, res, next) => {
+  req.query.limit = '5';
+  req.query.sort = '-ratingAverage, price';
+  req.query.fields = 'name,price,ratingAverage,summary,difficulty';
+  next();
+};
+
 // const tours = JSON.parse(
 //   fs.readFileSync(`${__dirname}/../dev-data/data/tours-simple.json`)
 // );
