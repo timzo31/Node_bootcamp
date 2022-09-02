@@ -98,7 +98,7 @@ exports.updateTour = async (req, res) => {
   } catch (err) {
     res.status(404).json({
       status: 'Failure',
-      message: 'Failed to update the Tour !',
+      message: err.message,
     });
   }
 };
