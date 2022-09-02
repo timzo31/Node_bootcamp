@@ -11,7 +11,7 @@ exports.aliasTopTours = (req, res, next) => {
 
 exports.getAllTours = async (req, res) => {
   try {
-    console.log(req.query);
+    //console.log(req.query);
     // EXECUTE QUERY
 
     const features = new APIFeatures(Tour.find(), req.query)
@@ -150,6 +150,67 @@ exports.getTourStats = async (req, res) => {
       message: 'Tour successfully retrieved !!',
       data: {
         stats,
+      },
+    });
+  } catch (err) {
+    res.status(404).json({
+      status: 'Failure',
+      message: err.message,
+    });
+  }
+};
+
+exports.getMonthlyPlan = async (req, res) => {
+  try {
+    const year = req.params.year * 1;
+
+    const plan = Tour.aggregate([
+      {
+        $unwind: '$startDates',
+      },
+      {
+        $match: {
+          startDates: {
+            $gte: new Date(`${year}-01-01`),
+            $lte: new Date(`${year}-12-31`),
+          },
+        },
+      },
+      {
+        $group: {
+          _id: {
+            $month: '$startDates',
+            numTourStarts: { $sum: 1 },
+            tours: {
+              $push: '$name',
+            },
+          },
+        },
+      },
+      {
+        $addField: {
+          month: '$_id',
+        },
+      },
+      {
+        $project: {
+          _id: 0,
+        },
+      },
+      {
+        $sort: {
+          numTourStarts: -1,
+        },
+      },
+      {
+        $limit: 12,
+      },
+    ]);
+
+    res.status(400).json({
+      status: 'Success',
+      data: {
+        plan,
       },
     });
   } catch (err) {
