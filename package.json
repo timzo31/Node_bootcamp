@@ -1,42 +1,43 @@
 {
-  "name": "node_bootcamp",
-  "version": "1.0.0",
-  "description": "NodeJs, Express, MongoDB & more: The bootcamp 2022",
-  "main": "4-NATOURS/app.js",
-  "scripts": {
-    "start": "nodemon 4-NATOURS/server.js",
-    "start:prod": "NODE_ENV=production nodemon 4-NATOURS/server.js"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/timzo31/Node_bootcamp.git"
-  },
-  "author": "TIMERA Mamadou",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/timzo31/Node_bootcamp/issues"
-  },
-  "homepage": "https://github.com/timzo31/Node_bootcamp#readme",
-  "dependencies": {
-    "dotenv": "^16.0.1",
-    "express": "^4.18.1",
-    "live-server": "~1.2.2",
-    "mongodb": "^4.9.0",
-    "mongoose": "^6.5.2",
-    "morgan": "^1.10.0",
-    "slugify": "^1.6.5",
-    "validator": "^13.7.0"
-  },
-  "devDependencies": {
-    "eslint": "^8.22.0",
-    "eslint-config-airbnb": "^19.0.4",
-    "eslint-config-prettier": "^8.5.0",
-    "eslint-plugin-import": "^2.26.0",
-    "eslint-plugin-jsx-a11y": "^6.6.1",
-    "eslint-plugin-node": "^11.1.0",
-    "eslint-plugin-prettier": "^4.2.1",
-    "eslint-plugin-react": "^7.30.1",
-    "nodemon": "^2.0.19",
-    "prettier": "^2.7.1"
-  }
+    "name": "node_bootcamp",
+    "version": "1.0.0",
+    "description": "NodeJs, Express, MongoDB & more: The bootcamp 2022",
+    "main": "4-NATOURS/app.js",
+    "scripts": {
+        "start": "nodemon 4-NATOURS/server.js",
+        "start:prod": "NODE_ENV=production nodemon 4-NATOURS/server.js",
+        "debug": "ndb 4-NATOURS/server.js"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/timzo31/Node_bootcamp.git"
+    },
+    "author": "TIMERA Mamadou",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/timzo31/Node_bootcamp/issues"
+    },
+    "homepage": "https://github.com/timzo31/Node_bootcamp#readme",
+    "dependencies": {
+        "dotenv": "^16.0.1",
+        "express": "^4.18.1",
+        "live-server": "~1.2.2",
+        "mongodb": "^4.9.0",
+        "mongoose": "^6.5.2",
+        "morgan": "^1.10.0",
+        "slugify": "^1.6.5",
+        "validator": "^13.7.0"
+    },
+    "devDependencies": {
+        "eslint": "^8.22.0",
+        "eslint-config-airbnb": "^19.0.4",
+        "eslint-config-prettier": "^8.5.0",
+        "eslint-plugin-import": "^2.26.0",
+        "eslint-plugin-jsx-a11y": "^6.6.1",
+        "eslint-plugin-node": "^11.1.0",
+        "eslint-plugin-prettier": "^4.2.1",
+        "eslint-plugin-react": "^7.30.1",
+        "nodemon": "^2.0.19",
+        "prettier": "^2.7.1"
+    }
 }
